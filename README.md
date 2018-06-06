@@ -92,11 +92,13 @@ cd iot
 pip3 install ibmiotf
 
 python3 publish.py mqtt-config1.json
+cd -
 
 ```
 
 To subsequently view all devices added to the Cristata database run:
 ```
+cd openwhisk
 bx wsk action invoke Cristata-DeviceListing --result
 ```
 
