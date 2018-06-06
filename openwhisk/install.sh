@@ -56,8 +56,7 @@ bx wsk action $ACTION --kind python:3 $DB2_PARAMS --param database $DB2_SCHEMA.G
 
 bx wsk package refresh
 
-suffix=`date +%Y%m%d%H%M`
 feed="Bluemix_cristata-mhub_credentials/messageHubFeed"
-bx wsk trigger create cristata-mhub-$suffix --feed $feed --param topic watson-iot
-bx wsk rule create cristata-mhub-rule-$suffix cristata-mhub $ADD
+bx wsk trigger create cristata-mhub-$DBVERSION --feed $feed --param topic watson-iot
+bx wsk rule create cristata-mhub-rule-$DBVERSION cristata-mhub-$DBVERSION $ADD
 

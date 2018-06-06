@@ -8,19 +8,23 @@ from db2 import DB2
 
 MAX_INSERT_COUNT = 1000
 
-SQL_TEMPLATE = ''
-SQL_TEMPLATE += 'CALL {database}('
-SQL_TEMPLATE += '\'{{device_id}}\', TIMESTAMP(\'{{observed_timestamp}}\'), {{value}}'
-SQL_TEMPLATE += ')'
+#Insert a double value
+SQL_TEMPLATE1 = 'CALL {database}(\'{{device_id}}\', TIMESTAMP(\'{{observed}}\'), {{value}});'
+
+#Insert a text value
+SQL_TEMPLATE2 = 'CALL {database}(\'{{device_id}}\', TIMESTAMP(\'{{observed}}\'), NULL, \'{{value}}\');'
 
 
 def gen_insert(database, m):
-    sql_template = SQL_TEMPLATE.format(database=database)
+    sql_template1 = SQL_TEMPLATE1.format(database=database)
+    sql_template2 = SQL_TEMPLATE2.format(database=database)
 
     if type(m) == str:
         args = json.loads(m)
     else:
         args = m
+
+    sql = ''
 
     try:
         t = args['insert_args']['device_id']
@@ -28,17 +32,13 @@ def gen_insert(database, m):
         v = args['insert_args']['value']
 
         if type(v) == str:
-            v = float(v)
-
-        #value could arrive as NaN
-        if (v is None) or (v != v):
-            err = {'device_id': t, 'observed_timestamp': o, 'value': v }
-            return err, False
+            sql += sql_template2.format(device_id=t, observed=o, value=v)
+        else:
+            sql += sql_template1.format(device_id=t, observed=o, value=v)
     except Exception as e:
         print('Error: %r' % e)
         return str(e), False
 
-    sql = sql_template.format(device_id = t, observed_timestamp = o, value = v)
     return sql, True
 
 

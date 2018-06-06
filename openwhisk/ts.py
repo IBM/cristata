@@ -36,10 +36,17 @@ def process_response(db2, text):
         for row in reader:
             if len(row) > 1:
                 d = db2.isodate(row[1])
-                v = [ d, float(row[2]) ]
+                num_v = None
+
+                try:
+                    num_v = float(row[2])
+                except:
+                    pass
+
+                v = [ d, num_v, row[3] ]
                 t.append(v)
 
-    return { 'timeseries': t, 'timeseriesRows': len(t), 'timeseriesMetadata': ["observedTimestampUTC","value"] }
+    return { 'timeseries': t, 'timeseriesRows': len(t), 'timeseriesMetadata': ["observedTimestampUTC","value","text"] }
 
 
 def main(args):
