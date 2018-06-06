@@ -62,6 +62,10 @@ As part of this provisioning process:
 Note: some of these IBM Cloud components are **not free**.
 
 
+## Connect Watson IoT to MessageHub
+Now, a manual step is required unfortunately, to connect Watson IoT and Message Hub. This is achieved in the Watson IoT dashboard [See here for details](wiotToMhub.md).
+
+
 ## Set up IBM Cloud Functions
 
 1. Change into the `openwhisk` directory which now contains `my_setup.sh`. This was generated automatically by the provisioning process.
@@ -76,8 +80,7 @@ make all
 cd -
 ```
 
-## Connect Watson IoT to MessageHub
-The final deployment step is manual unfortunately, to connect Watson IoT and Message Hub. This is achieved in the Watson IoT dashboard [See here for details](wiotToMhub.md).
+It may take a few moments for the installed IBM Cloud Functions triggers and actions to become ready for use.
 
 
 ## Test pipeline by sending a message to Watson IoT
