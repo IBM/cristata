@@ -68,11 +68,11 @@ Now, a manual step is required unfortunately, to connect Watson IoT and Message 
 
 ## Set up IBM Cloud Functions
 
-1. Change into the `openwhisk` directory which now contains `my_setup.sh`. This was generated automatically by the provisioning process.
+1. Change into the `openwhisk` directory, which now contains `my_setup.sh`. This was generated automatically by the provisioning process.
 2. Invoke the makefile to build the actions for IBM Cloud Functions.
-3. Deploy the Functions by invoking using the install script.
+3. Deploy the actions by invoking the install script.
 
-The commands for these actions are:
+The commands are:
 ```
 cd openwhisk
 make all
@@ -80,7 +80,7 @@ make all
 cd -
 ```
 
-It may take a few moments for the installed IBM Cloud Functions triggers and actions to become ready for use.
+Note: It may take a few moments for the installed IBM Cloud Functions triggers and actions to become ready for use.
 
 
 ## Test pipeline by sending a message to Watson IoT
