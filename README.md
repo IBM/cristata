@@ -110,6 +110,4 @@ bx wsk action invoke Cristata-TimeSeriesRetrieve -P request.json --result
 
 Cristata is a sub-component of the GOFLEX H2020 project.
 
-The project Generalized Operational FLEXibility for Integrating Renewables in the Distribution Grid (GOFLEX) has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 731232.
-
-![Horizon H2020](/images/EU.png)
+![The project Generalized Operational FLEXibility for Integrating Renewables in the Distribution Grid (GOFLEX) has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 731232](/images/EU.png)
