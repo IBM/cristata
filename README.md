@@ -106,3 +106,8 @@ And to view measurements for a given device (as specified in `request.json`) run
 ```
 bx wsk action invoke Cristata-TimeSeriesRetrieve -P request.json --result
 ```
+
+
+The project Generalized Operational FLEXibility for Integrating Renewables in the Distribution Grid (GOFLEX) has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 731232.
+
+![Horizon H2020](/images/EU.gif)
