@@ -65,7 +65,7 @@ class DB2():
         print("%r" % temp)
 
         if len(temp) > (1048576/2)-4096:
-            fail(413, 'Too many results')
+            self.fail(413, 'Too many results')
         else:
             result = {'status': 200, 'state': 'Success', 'result': msResponse}
 
