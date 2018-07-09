@@ -46,7 +46,7 @@ def main(args):
         response = process_response(r.text)
         result = db2.success(response)
     except Exception as e:
-        result = msg.fail(400, str(e))
+	result = {'status': 400, 'state': 'Failed', 'result': str(e)}
         print('Error: %r' % result)
 
     dbg = args.get('debug', False)
