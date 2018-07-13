@@ -22,14 +22,13 @@ def publish(config_file):
         client.connect()
         qos = 2  # Quality of service: exactly once
 
-        my_data = {
-		"insert_args": {
-			"observed_timestamp": "2018-04-22 13:24:23", 
-			"device_id": "1", 
-			"value": 52.2
-		}
-	}
-
+        my_data = [
+		{ "observed_timestamp": "2018-04-22 13:24:23", "device_id": "1", "value": 52.2 },
+		{ "observed_timestamp": "2018-04-22 13:24:24", "device_id": "1", "value": 57.2 },
+		{ "observed_timestamp": "2018-04-22 13:24:25", "device_id": "1", "value": "something" },
+		{ "observed_timestamp": "2018-04-22 13:24:26", "device_id": "1", "text": "something else" },
+		{ "observed_timestamp": "2018-04-22 13:24:27", "device_id": "1", "value": 444.22, "text": "more" }
+	]
         success = client.publishEvent('status', 'json', my_data, qos, on_publish=published)
         if not success:
             print('failed to publish message')

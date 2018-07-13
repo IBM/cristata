@@ -99,7 +99,7 @@ cd -
 To subsequently view all devices added to the Cristata database run:
 ```
 cd openwhisk
-bx wsk action invoke Cristata-DeviceListing --result
+bx wsk action invoke cristata-DeviceListing --result
 ```
 
 And to view measurements for a given device (as specified in `request.json`) run:
@@ -107,6 +107,8 @@ And to view measurements for a given device (as specified in `request.json`) run
 bx wsk action invoke Cristata-TimeSeriesRetrieve -P request.json --result
 ```
 
+
+## GOFLEX Project
 
 Cristata is a sub-component of the GOFLEX H2020 project. 
 

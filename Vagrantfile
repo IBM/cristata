@@ -11,13 +11,13 @@ apt-get update
 apt-get upgrade -y
 
 # for building Python 3.6.4
-apt-get install -y openjdk-8-jdk maven zip python3.6 python3-pip jq
+apt-get install -y openjdk-8-jdk maven zip python3.6 python3-pip jq flake8
 apt-get autoremove -y
 
 cd ${HOME}
 
 echo "fetch, install bluemix cli"
-wget -q http://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/0.7.0/IBM_Cloud_CLI_0.7.9_amd64.tar.gz -O ./Bluemix_CLI.tar.gz
+wget -q http://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/0.7.1/IBM_Cloud_CLI_0.7.1_amd64.tar.gz -O ./Bluemix_CLI.tar.gz
 tar -xf Bluemix_CLI.tar.gz
 cd Bluemix_CLI
 ./install_bluemix_cli

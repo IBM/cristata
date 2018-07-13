@@ -12,12 +12,16 @@ MAX_INSERT_COUNT = 1000
 SQL_TEMPLATE1 = 'CALL {database}(\'{{device_id}}\', TIMESTAMP(\'{{observed}}\'), {{value}});'
 
 #Insert a text value
-SQL_TEMPLATE2 = 'CALL {database}(\'{{device_id}}\', TIMESTAMP(\'{{observed}}\'), NULL, \'{{value}}\');'
+SQL_TEMPLATE2 = 'CALL {database}(\'{{device_id}}\', TIMESTAMP(\'{{observed}}\'), NULL, \'{{text}}\');'
+
+#Insert a combination double/text value
+SQL_TEMPLATE3 = 'CALL {database}(\'{{device_id}}\', TIMESTAMP(\'{{observed}}\'), {{value}}, \'{{text}}\');'
 
 
 def gen_insert(database, m):
     sql_template1 = SQL_TEMPLATE1.format(database=database)
     sql_template2 = SQL_TEMPLATE2.format(database=database)
+    sql_template3 = SQL_TEMPLATE3.format(database=database)
 
     if type(m) == str:
         args = json.loads(m)
@@ -27,14 +31,31 @@ def gen_insert(database, m):
     sql = ''
 
     try:
-        t = args['insert_args']['device_id']
-        o = args['insert_args']['observed_timestamp']
-        v = args['insert_args']['value']
+        for row in args:
+            if 'device_id' not in row:
+                continue
+            if 'observed_timestamp' not in row:
+                continue
 
-        if type(v) == str:
-            sql += sql_template2.format(device_id=t, observed=o, value=v)
-        else:
-            sql += sql_template1.format(device_id=t, observed=o, value=v)
+            i = row['device_id']
+            o = row['observed_timestamp']
+
+            t, v = None, None
+            if 'value' in row:
+                v = row['value']
+            if 'text' in row:
+                t = row['text']
+
+            if v is not None:
+                if type(v) == str:
+                    #string value - ignore any text
+                    sql += sql_template2.format(device_id=i, observed=o, text=v)
+                elif t is not None:
+                    sql += sql_template3.format(device_id=i, observed=o, value=v, text=t)
+                else:
+                    sql += sql_template1.format(device_id=i, observed=o, value=v)
+            elif t is not None:
+                sql += sql_template2.format(device_id=i, observed=o, text=t)
     except Exception as e:
         print('Error: %r' % e)
         return str(e), False
