@@ -3,11 +3,13 @@
 
 bx_creds=./temp-cred.json
 
+source ./service_names.sh
+
 
 function db2 {
-    bx service create 'dashDB' 'Entry' cristata-db2
-    bx service key-create cristata-db2 credentials
-    bx service key-show cristata-db2 credentials > $bx_creds
+    bx service create 'dashDB' 'Entry' $CRISTATA_DB2
+    bx service key-create $CRISTATA_DB2 $CREDENTIAL_DB2
+    bx service key-show $CRISTATA_DB2 $CREDENTIAL_DB2 > $bx_creds
     sed -i -e '1,4d' $bx_creds
 
     jdbc=`cat $bx_creds | jq '.ssljdbcurl' | tr -d '"'`
@@ -25,9 +27,9 @@ function db2 {
 }
 
 function iot {
-    bx service create iotf-service iotf-service-free cristata-iot
-    bx service key-create cristata-iot credentials
-    bx service key-show cristata-iot credentials > $bx_creds
+    bx service create iotf-service iotf-service-free $CRISTATA_IOT
+    bx service key-create $CRISTATA_IOT $CREDENTIAL_IOT
+    bx service key-show $CRISTATA_IOT $CREDENTIAL_IOT > $bx_creds
     sed -i -e '1,4d' $bx_creds
 
     key=`cat $bx_creds | jq '.apiKey' | tr -d '"'`
@@ -39,16 +41,16 @@ function iot {
 }
 
 function mhub {
-    bx service create messagehub standard cristata-mhub
-    bx service key-create cristata-mhub credentials
-    bx service key-show cristata-mhub credentials > $bx_creds
+    bx service create messagehub standard $CRISTATA_MHUB
+    bx service key-create $CRISTATA_MHUB $CREDENTIAL_MHUB
+    bx service key-show $CRISTATA_MHUB $CREDENTIAL_MHUB > $bx_creds
     sed -i -e '1,4d' $bx_creds
 
     key=`cat $bx_creds | jq '.api_key' | sed -e 's/.*"\(.*\)".*/\1/'`
     url=`cat $bx_creds | jq '.kafka_admin_url' | sed -e 's/.*"\(.*\)".*/\1/'`
 
     cd mhub
-    python3 admin.py --url $url --api_key $key --topic watson-iot
+    python3 admin.py --url $url --api_key $key --topic $TOPIC_MHUB
     cd ..
 }
 

@@ -12,6 +12,7 @@ if [[ ! -f my_setup.sh ]]; then
 fi
 
 source my_setup.sh
+source ../service_names.sh
 
 DIR=.
 DBVERSION=$(cat $DIR/VERSION)
@@ -29,34 +30,39 @@ if [[ ! -f $DIR/get_devices-$DBVERSION.zip ]]; then
 	exit 1
 fi
 
-TS=Cristata-TimeSeriesRetrieve
-ADD=Cristata-TimeSeriesInsert
-DEV=Cristata-DeviceListing
-
 ACTION=create
-EXISTS=$(bx wsk action list | grep $TS)
+EXISTS=$(bx wsk action list | grep $WSK_TS)
 if [ -n "$EXISTS" ]; then
 	ACTION=update
 fi
-bx wsk action $ACTION --kind python:3 $DB2_PARAMS --param database $DB2_SCHEMA.GET_TS --param debug true $TS $DIR/get_ts-$DBVERSION.zip
+bx wsk action $ACTION --kind python:3 $DB2_PARAMS --param database $DB2_SCHEMA.GET_TS --param debug true $WSK_TS $DIR/get_ts-$DBVERSION.zip
 
 ACTION=create
-EXISTS=$(bx wsk action list | grep $ADD)
+EXISTS=$(bx wsk action list | grep $WSK_ADD)
 if [ -n "$EXISTS" ]; then
 	ACTION=update
 fi
-bx wsk action $ACTION --kind python:3 $DB2_PARAMS --param database $DB2_SCHEMA.ADD_TS --param debug true $ADD $DIR/insert-$DBVERSION.zip
+bx wsk action $ACTION --kind python:3 $DB2_PARAMS --param database $DB2_SCHEMA.ADD_TS --param debug true $WSK_ADD $DIR/insert-$DBVERSION.zip
 
 ACTION=create
-EXISTS=$(bx wsk action list | grep $DEV)
+EXISTS=$(bx wsk action list | grep $WSK_DEV)
 if [ -n "$EXISTS" ]; then
 	ACTION=update
 fi
-bx wsk action $ACTION --kind python:3 $DB2_PARAMS --param database $DB2_SCHEMA.GET_DEVICES --param debug true $DEV $DIR/get_devices-$DBVERSION.zip
+bx wsk action $ACTION --kind python:3 $DB2_PARAMS --param database $DB2_SCHEMA.GET_DEVICES --param debug true $WSK_DEV $DIR/get_devices-$DBVERSION.zip
 
 bx wsk package refresh
 
-feed="Bluemix_cristata-mhub_credentials/messageHubFeed"
-bx wsk trigger create cristata-mhub-$DBVERSION --feed $feed --param topic watson-iot
-bx wsk rule create cristata-mhub-rule-$DBVERSION cristata-mhub-$DBVERSION $ADD
+temp=`bx wsk trigger list | grep $CRISTATA_WSK_TRIGGER | cut -d'/' -f3 | cut -d' ' -f1`
+if [ -n "$temp" ]; then
+    bx wsk trigger delete $temp
+fi
+
+temp=`bx wsk rule list | grep $CRISTATA_WSK_RULE | cut -d'/' -f3 | cut -d' ' -f1`
+if [ -n "$temp" ]; then
+    bx wsk rule delete $temp
+fi
+
+bx wsk trigger create $CRISTATA_WSK_TRIGGER$DBVERSION --feed $WSK_FEED --param topic $TOPIC_MHUB
+bx wsk rule create $CRISTATA_WSK_RULE$DBVERSION $CRISTATA_WSK_TRIGGER$DBVERSION $WSK_ADD
 
