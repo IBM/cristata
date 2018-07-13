@@ -31,7 +31,7 @@ bx target -s <SPACE> # Manually select space
 
 ## Bulding Helper Components
 
-Cristata is backed by a DB2 schema, which must be deployed. A helper component is built for this purpose using Maven. First, fetch the `IBM Data Server Driver for JDBC and SQLJ (JCC Driver) version 11.1` from here http://www-01.ibm.com/support/docview.wss?uid=swg21363866. This driver (db2jcc4.jar) must be installed in the local Maven repository before building the helper component.
+Cristata is backed by a DB2 schema, which must be deployed. A helper component is built for this purpose using Maven. First, fetch the `IBM Data Server Driver for JDBC and SQLJ (JCC Driver) version 11.1` from here http://www-01.ibm.com/support/docview.wss?uid=swg21363866. This driver (`db2jcc4.jar`) must be installed in the local Maven repository before building the helper component.
 
 ```
 cp /path/to/db2jcc4.jar ./sql
@@ -41,7 +41,7 @@ mvn clean package
 cd -
 ```
 
-Futher details about this component can be found [here](sql/README.md).
+Further details about this component can be found [here](sql/README.md).
 
 
 ## Provision IBM Cloud Components
@@ -85,7 +85,7 @@ Note: It may take a few moments for the installed IBM Cloud Functions triggers a
 
 ## Test pipeline by sending a message to Watson IoT
 
-At this point, all components are provisioned and configured. During the provisioning process, credentials for new devices were created (mqtt-config1/2.json). These credentials can now be used to send data to the platform.
+At this point, all components are provisioned and configured. During the provisioning process, credentials for new devices were created (`mqtt-config1/2.json`). These credentials can now be used to send data to the platform.
 
 ```
 cd iot
