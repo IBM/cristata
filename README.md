@@ -107,6 +107,9 @@ And to view measurements for a given device (as specified in `request.json`) run
 bx wsk action invoke cristata-TimeSeriesRetrieve -P request.json --result
 ```
 
+### Action REST API
+Actions can also be invoked through their default REST API. The ```invoke.sh``` script provides an example using curl.
+
 
 ## GOFLEX Project
 
