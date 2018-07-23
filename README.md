@@ -80,7 +80,7 @@ make all
 cd -
 ```
 
-Note: It may take a few moments for the installed IBM Cloud Functions triggers and actions to become ready for use.
+**Note**: It may take a few moments for the installed IBM Cloud Functions triggers and actions to become ready for use.
 
 
 ## Test pipeline by sending a message to Watson IoT
@@ -104,7 +104,7 @@ bx wsk action invoke cristata-DeviceListing --result
 
 And to view measurements for a given device (as specified in `request.json`) run:
 ```
-bx wsk action invoke Cristata-TimeSeriesRetrieve -P request.json --result
+bx wsk action invoke cristata-TimeSeriesRetrieve -P request.json --result
 ```
 
 
