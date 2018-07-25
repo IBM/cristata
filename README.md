@@ -32,7 +32,7 @@ Alternatively, the required tools can be installed directly on the host machine.
 
 Login, and set organisation and space, using a combination of the commands below:
 ```
-bx login -a https://api.ng.bluemix.net
+bx login -a https://api.ng.bluemix.net #or https://api.eu-gb.bluemix.net, https://api.eu-de.bluemix.net
 bx iam orgs  # Outputs available organisations
 bx iam spaces # Outputs available spaces
 bx target --cf # Interactively select organisation/space
