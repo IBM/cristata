@@ -12,8 +12,20 @@ Cristata is a system, targeted at the developer community, to support general Io
 ## Assumptions
 - An IBM Cloud account is already created (https://console.bluemix.net/)
 - With an organisation and space created
-- IBM Cloud (Bluemix) CLI (command line interface) is installed (see Vagrantfile for details)
-- IBM Cloud (Bluemix) Functions CLI (command line interface) is installed (see Vagrantfile for details)
+- IBM Cloud (Bluemix) CLI (command line interface) is installed (see [Vagrantfile](Vagrantfile) for details)
+- IBM Cloud (Bluemix) Functions CLI (command line interface) is installed (see [Vagrantfile](Vagrantfile) for details)
+- Optionally a virtual machine is provisioned.
+
+
+## Development Environment
+For ease of development and in particular, deployment to the IBM Cloud, a virtual machine is used which contains the required software and tools. A [Vagrantfile](Vagrantfile) is provided, which automates the provisioning of this virtual machine. To use this, VirtualBox and vagrant must be installed. Then it's simply a matter of running:
+
+```
+vagrant up
+vagrant ssh
+```
+
+Alternatively, the required tools can be installed directly on the host machine. Please refer to the [Vagrantfile](Vagrantfile) for dependency information.
 
 
 ## IBM Cloud Login
@@ -27,17 +39,6 @@ bx target --cf # Interactively select organisation/space
 bx target -o <ORG> # Manually select organisation
 bx target -s <SPACE> # Manually select space
 ```
-
-## Development Environment
-For ease of development and in particular, deployment to the IBM Cloud, a virtual machine is used which contains the required software and tools. A [Vagrantfile](Vagrantfile) is provided, which automates the provisioning of this virtual machine. To use this, VirtualBox and vagrant must be installed. Then it's simply a matter of running:
-
-```
-vagrant up
-vagrant ssh
-```
-
-Alternatively, the required tools can be installed directly on the host machine. Please refer to the [Vagrantfile](Vagrantfile) for dependency information.
-
 
 ## Bulding Helper Components
 
