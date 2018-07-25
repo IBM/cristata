@@ -11,6 +11,6 @@ ow_ver=`bx wsk property get --apiversion | tr -s "\t" | cut -f2`
 ow_url="https://$ow_host/api/$ow_ver/namespaces"
 ow_space=`bx wsk action list | grep $WSK_ADD | cut -f1 -d' ' | cut -f2 -d'/'`
 
-curl -u $ow_key --header "Content-Type: application/json" -X POST $ow_url/$ow_space/actions/$WSK_TS?blocking=true -d @request.json
+curl -s -u $ow_key --header "Content-Type: application/json" -X POST $ow_url/$ow_space/actions/$WSK_TS?blocking=true -d @request.json | jq '.response.result.result'
 
 
