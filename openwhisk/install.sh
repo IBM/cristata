@@ -48,7 +48,7 @@ bx wsk action $ACTION --kind python:3 $DB2_PARAMS --param database $DB2_SCHEMA.G
 
 # create/update message hub parse action
 ACTION=create
-EXISTS=$(bx wsk action list | grep $WSK_ADD)
+EXISTS=$(bx wsk action list | grep $WSK_MHUB)
 if [ -n "$EXISTS" ]; then
 	ACTION=update
 fi
@@ -56,7 +56,7 @@ bx wsk action $ACTION  --kind python:3  $WSK_MHUB $DIR/mhub-parse-$DBVERSION.zip
 
 # create/update timeseries insert action
 ACTION=create
-EXISTS=$(bx wsk action list | grep $WSK_ADD)
+EXISTS=$(bx wsk action list | grep $WSK_TSINSERT)
 if [ -n "$EXISTS" ]; then
 	ACTION=update
 fi
@@ -64,7 +64,7 @@ bx wsk action $ACTION  --kind python:3  $DB2_PARAMS  --param database $DB2_SCHEM
 
 # create/update insert sequence
 ACTION=create
-EXISTS=$(bx wsk action list | grep $WSK_ADD)
+EXISTS=$(bx wsk action list | grep $WSK_INSERT)
 if [ -n "$EXISTS" ]; then
 	ACTION=update
 fi
