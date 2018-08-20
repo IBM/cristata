@@ -9,8 +9,10 @@ clean:
 	-@rm -f __main__.py
 
 build:
-	@cp insert.py __main__.py
-	zip -r insert-$(VERSION).zip __main__.py db2.py
+	@cp mhub_parse.py __main__.py
+	zip -r mhub-parse-$(VERSION).zip __main__.py
+	@cp db2_insert.py __main__.py
+	zip -r db2-insert-$(VERSION).zip __main__.py db2.py
 	@cp ts.py __main__.py
 	zip -r get_ts-$(VERSION).zip __main__.py db2.py
 	@cp devices.py __main__.py
