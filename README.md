@@ -1,7 +1,7 @@
 # Cristata
 With the ever increasing proliferation of IoT devices, and the resulting frequency of data emanating from many devices, the acquisition and management of this data is proving to be a challenge.
 
-In dealing with this challenge, cloud-based sytems that provide service elasticity are helpful in handling the potentially intermittent bursts of high volume data from these devices.
+In dealing with this challenge, cloud-based systems that provide service elasticity are helpful in handling the potentially intermittent bursts of high volume data from these devices.
 
 Cristata is a system, targeted at the developer community, to support general IoT data ingestion. It utilises several existing IBM Cloud services and details how these services are wired together. Serverless computing is employed to provide service elasticity and reduce the infrastructure management burden. Sample code includes SQL code for data storage (schema), Openwhisk actions (Cloud Functions) for interfacing with this schema and IoT data submission code.
 
@@ -40,7 +40,7 @@ bx target -o <ORG> # Manually select organisation
 bx target -s <SPACE> # Manually select space
 ```
 
-## Bulding Helper Components
+## Building Helper Components
 
 Cristata is backed by a DB2 schema, which must be deployed. A helper component is built for this purpose using Maven. First, fetch the `IBM Data Server Driver for JDBC and SQLJ (JCC Driver) version 11.1` from here http://www-01.ibm.com/support/docview.wss?uid=swg21363866. This driver (`db2jcc4.jar`) must be installed in the local Maven repository before building the helper component.
 
